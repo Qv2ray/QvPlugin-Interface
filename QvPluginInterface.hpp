@@ -1,14 +1,17 @@
 #pragma once
 
 #include <QFlags>
+#include <QMap>
 #include <QObject>
 #include <QString>
+#include <QVariant>
 #include <QWidget>
 
 constexpr auto QV2RAY_PLUGIN_INTERFACE_VERSION = 1;
 
 enum QV2RAY_PLUGIN_HOOK_TYPE
 {
+    NONE,
     /// This plugin listens on group (Creation, Renaming, Modifying, Updating (subscription) and Removing)
     /// and connection               (Creation, Renaming, Modifying, Latency Testing and Removing)
     CONFIG_EVENTS,
@@ -101,7 +104,7 @@ class Qv2rayInterface
     virtual QStringList OutboundTypes() const = 0;
     //
     /// The UI Widget object of the plugin.
-    virtual const QMap<QV2RAY_PLUGIN_UI_TYPE, QWidget *&> GetUIWidgets() = 0;
+    virtual const QMap<QV2RAY_PLUGIN_UI_TYPE, QWidget *> GetUIWidgets() = 0;
     /// If the plugin is a kernel,
     virtual QObject *GetKernelInstance() = 0;
     //
@@ -114,13 +117,10 @@ class Qv2rayInterface
     // Kernel type handling
     // Serializaiton handling
     // Geneation handling
-  signals:
-    void PluginLog(const QString &);
+    virtual void PluginLog(const QString &) const = 0;
 };
 
 QT_BEGIN_NAMESPACE
-
 #define Qv2rayInterface_IID "com.github.Qv2ray.Qv2rayPluginInterface"
-
 Q_DECLARE_INTERFACE(Qv2rayInterface, Qv2rayInterface_IID)
 QT_END_NAMESPACE
