@@ -109,7 +109,8 @@ class Qv2rayInterface
     /// The UI Widget object of the plugin.
     virtual const QMap<QV2RAY_PLUGIN_UI_TYPE, QWidget *> GetUIWidgets() = 0;
     /// If the plugin is a kernel,
-    virtual QObject *GetKernelInstance() = 0;
+    virtual Qv2rayKernelPlugin *GetKernelInstance() = 0;
+    virtual QObject *GetQObject() = 0;
     //
     virtual void InitializePlugin(const QJsonObject &) = 0;
     virtual const QJsonObject GetPluginSettngs() = 0;
