@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QFlags>
+#include <QIcon>
 #include <QMap>
 #include <QObject>
 #include <QString>
@@ -99,6 +100,8 @@ class Qv2rayInterface
     virtual QString Author() const = 0;
     /// A brief description of the plugin
     virtual QString Description() const = 0;
+    /// The icon of the plugin
+    virtual const QIcon Icon() const = 0;
     //
     /// A list of valid outbounds where this plugin is capable to handle, if any.
     virtual QStringList OutboundTypes() const = 0;
