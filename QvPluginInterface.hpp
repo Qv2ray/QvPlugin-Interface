@@ -113,7 +113,7 @@ namespace Qv2ray
         virtual QStringList OutboundTypes() const = 0;
         //
         /// The UI Widget object of the plugin.
-        virtual const QWidget *GetUIWidgets(QV2RAY_PLUGIN_UI_TYPE) = 0;
+        virtual QWidget *GetUIWidgets(QV2RAY_PLUGIN_UI_TYPE) = 0;
         /// If the plugin is a kernel,
         virtual Qv2rayKernelPlugin *GetKernelInstance() = 0;
         virtual QObject *GetQObject() = 0;
