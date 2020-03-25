@@ -20,7 +20,7 @@ namespace Qv2ray
         /// and connection               (Creation, Renaming, Modifying, Latency Testing and Removing)
         HOOK_TYPE_CONFIG_EVENTS,
         /// This plugin listens on connection Pre-Connect, Post-Connection, Pre-Disconnect and Post-Disconnect
-        HOOK_TYPE_CONFIG_STATE_EVENTS,
+        HOOK_TYPE_STATE_EVENTS,
         /// This plugin listens on statistics event
         HOOK_TYPE_STATS_EVENTS
     };
@@ -69,7 +69,8 @@ namespace Qv2ray
     Q_ENUM_NS(QV2RAY_PLUGIN_HOOK_SUBTYPE)
     Q_ENUM_NS(QV2RAY_SPECIAL_PLUGIN_TYPE)
 
-    Q_DECLARE_FLAGS(QV2RAY_PLUGIN_HOOK_TYPE_FLAGS, QV2RAY_PLUGIN_HOOK_TYPE)
+    typedef QList<QV2RAY_PLUGIN_HOOK_TYPE> QV2RAY_PLUGIN_HOOK_TYPE_FLAGS;
+    typedef QList<QV2RAY_SPECIAL_PLUGIN_TYPE> QV2RAY_SPECIAL_PLUGIN_TYPE_FLAGS;
 
     class Qv2rayKernelPluginObject : public QObject
     {
@@ -101,7 +102,7 @@ namespace Qv2ray
         virtual ~Qv2rayInterface() = default;
         //
         virtual QV2RAY_PLUGIN_HOOK_TYPE_FLAGS PluginHooks() const = 0;
-        virtual QV2RAY_SPECIAL_PLUGIN_TYPE SpecialPluginType() const = 0;
+        virtual QV2RAY_SPECIAL_PLUGIN_TYPE_FLAGS SpecialPluginType() const = 0;
         //
         // Basic metainfo of this plugin
         /// Display name of this plugin
@@ -130,7 +131,7 @@ namespace Qv2ray
         virtual const QJsonObject GetPluginSettngs() = 0;
         //
         /// The hook function, for SPECIAL_TYPE_NONE
-        virtual void PluginHook(QV2RAY_PLUGIN_HOOK_TYPE, QV2RAY_PLUGIN_HOOK_SUBTYPE, QVariant) = 0;
+        virtual void ProcessHook(QV2RAY_PLUGIN_HOOK_TYPE, QV2RAY_PLUGIN_HOOK_SUBTYPE, QVariant *) = 0;
         // TODO:
         // Kernel type handling
         // Serializaiton handling
