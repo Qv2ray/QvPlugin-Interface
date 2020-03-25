@@ -56,8 +56,6 @@ namespace Qv2ray
 
     enum QV2RAY_PLUGIN_UI_TYPE
     {
-        /// The UI in the Preference Window
-        UI_TYPE_PREFERENCE_WINDOW,
         /// The UI in the Outbound Editor
         UI_TYPE_OUTBOUND_EDITOR,
         /// The UI in the Inbound Editor
@@ -73,7 +71,7 @@ namespace Qv2ray
 
     Q_DECLARE_FLAGS(QV2RAY_PLUGIN_HOOK_TYPE_FLAGS, QV2RAY_PLUGIN_HOOK_TYPE)
 
-    class Qv2rayKernelPlugin : public QObject
+    class Qv2rayKernelPluginObject : public QObject
     {
         Q_OBJECT
         // Events handlers
@@ -85,6 +83,14 @@ namespace Qv2ray
         /// Kernel related operations
         void OnKernelCrashed(const QString &);
         void OnKernelLogAvaliable(const QString &);
+    };
+
+    class Qv2rayPluginEditorWidget : QWidget
+    {
+        Q_OBJECT
+        virtual ~Qv2rayPluginEditorWidget() = default;
+        virtual void SetContent(const QJsonObject &) = 0;
+        virtual const QJsonObject FinalizeEditing() = 0;
     };
 
     class Qv2rayInterface
@@ -113,9 +119,10 @@ namespace Qv2ray
         virtual QStringList OutboundTypes() const = 0;
         //
         /// The UI Widget object of the plugin.
-        virtual QWidget *GetUIWidgets(QV2RAY_PLUGIN_UI_TYPE) = 0;
+        virtual Qv2rayPluginEditorWidget *GetEditorWidget(QV2RAY_PLUGIN_UI_TYPE) = 0;
+        virtual QWidget *GetSettingsWidget() = 0;
         /// If the plugin is a kernel,
-        virtual Qv2rayKernelPlugin *GetKernelInstance() = 0;
+        virtual Qv2rayKernelPluginObject *GetKernelInstance() = 0;
         virtual QObject *GetQObject() = 0;
         //
         virtual void InitializePlugin(const QJsonObject &) = 0;
