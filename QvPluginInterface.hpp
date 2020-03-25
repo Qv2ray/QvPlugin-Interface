@@ -126,7 +126,7 @@ namespace Qv2ray
         virtual Qv2rayKernelPluginObject *GetKernelInstance() = 0;
         virtual QObject *GetQObject() = 0;
         //
-        virtual bool InitializePlugin(const QJsonObject &) = 0;
+        virtual bool InitializePlugin(const QString &, const QJsonObject &) = 0;
         virtual bool UpdatePluginSettings(const QJsonObject &) = 0;
         virtual const QJsonObject GetPluginSettngs() = 0;
         //
