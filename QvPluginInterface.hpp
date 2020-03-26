@@ -137,6 +137,7 @@ namespace Qv2ray
         // Serializaiton handling
         // Geneation handling
         virtual void PluginLog(const QString &) const = 0;
+        virtual void PluginErrorMessageBox(const QString &) const = 0;
     };
 } // namespace Qv2ray
 
