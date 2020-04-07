@@ -1,4 +1,5 @@
 #pragma once
+#include <QMap>
 #include <QObject>
 namespace Qv2rayPlugin
 {
@@ -6,6 +7,11 @@ namespace Qv2rayPlugin
     //
     //
     //
+    enum QvSystemProxyStateType
+    {
+        SystemProxyState_SetProxy,
+        SystemProxyState_ClearProxy
+    };
     enum QvSystemProxyType
     {
         SystemProxy_HTTP,
@@ -14,8 +20,8 @@ namespace Qv2rayPlugin
     struct QvSystemProxyEventObject
     {
         QString displayName;
-        QvSystemProxyType systemProxyType;
-        uint systemProxyPort;
+        QMap<QvSystemProxyType, int> systemProxyPortSettings;
+        QvSystemProxyStateType systemProxyState;
     };
     //
     //
@@ -47,23 +53,23 @@ namespace Qv2rayPlugin
     //
     //
     //
-    enum QvItemEventType
+    enum QvConnectionEntryEventType
     {
         ConnectionEvent_Created,
         ConnectionEvent_Renamed,
         ConnectionEvent_Updated,
         ConnectionEvent_Deleted
     };
-    struct QvItemEventObject
+    struct QvConnectionEntryEventObject
     {
         QString displayName;
         QString originalDisplayName;
-        QvItemEventType eventType;
+        QvConnectionEntryEventType eventType;
     };
     //
     //
     //
-    enum QV2RAY_PLUGIN_UI_TYPE
+    enum UI_TYPE
     {
         /// The UI in the Outbound Editor
         UI_TYPE_OUTBOUND_EDITOR,
@@ -72,24 +78,27 @@ namespace Qv2rayPlugin
         /// The UI in the Group Editor
         UI_TYPE_GROUP_EDITOR
     };
-    Q_ENUM_NS(QV2RAY_PLUGIN_UI_TYPE)
+    Q_ENUM_NS(UI_TYPE)
     //
-    enum QV2RAY_PLUGIN_PROCESSTYPE
+    enum CAPABILITY
     {
-        PROCESSTYPE_NONE,
+        CAPABILITY_NONE,
         /// This plugin listens on group (Creation, Renaming, Modifying, Updating (subscription) and Removing)
         /// and connection               (Creation, Renaming, Modifying, Latency Testing and Removing)
-        PROCESSTYPE_ITEM,
+        CAPABILITY_CONNECTION_ENTRY,
         /// This plugin listens on connection Pre-Connect, Post-Connection, Pre-Disconnect and Post-Disconnect
-        PROCESSTYPE_CONNECTIVITY,
+        CAPABILITY_CONNECTIVITY,
         /// This plugin listens on statistics event
-        PROCESSTYPE_STATS,
+        CAPABILITY_STATS,
         /// This plugin listens on system proxy settings.
-        PROCESSTYPE_SYSTEMPROXY
+        CAPABILITY_SYSTEM_PROXY
     };
-    Q_ENUM_NS(QV2RAY_PLUGIN_PROCESSTYPE)
+    Q_ENUM_NS(CAPABILITY)
+    typedef QList<CAPABILITY> CAPABILITY_FLAGS;
     //
-    enum QV2RAY_SPECIAL_PLUGIN_TYPE
+    //
+    //
+    enum SPECIAL_TYPE
     {
         /// This plugin is a connection kernel, providing new types of outbound.
         SPECIAL_TYPE_KERNEL,
@@ -98,11 +107,6 @@ namespace Qv2rayPlugin
         /// No special things.
         SPECIAL_TYPE_NONE
     };
-    Q_ENUM_NS(QV2RAY_SPECIAL_PLUGIN_TYPE)
-    //
-    //
-    //
-    typedef QList<QV2RAY_PLUGIN_PROCESSTYPE> QV2RAY_PLUGIN_PROCESSTYPE_FLAGS;
-    typedef QList<QV2RAY_SPECIAL_PLUGIN_TYPE> QV2RAY_SPECIAL_PLUGIN_TYPE_FLAGS;
-
+    Q_ENUM_NS(SPECIAL_TYPE)
+    typedef QList<SPECIAL_TYPE> SPECIAL_TYPE_FLAGS;
 } // namespace Qv2rayPlugin
