@@ -8,14 +8,14 @@ namespace Qv2rayPlugin
 {
     struct QvPluginMetadata
     {
-        const QString Name;
-        const QString Author;
-        const QString InternalName;
-        const QString Description;
-        const QIcon Icon;
+        QString Name;
+        QString Author;
+        QString InternalName;
+        QString Description;
+        QIcon Icon;
         //
-        const CAPABILITY_FLAGS Capabilities;
-        const SPECIAL_TYPE_FLAGS SpecialPluginType;
+        CAPABILITY_FLAGS Capabilities;
+        SPECIAL_TYPE_FLAGS SpecialPluginType;
         QvPluginMetadata(const QString &name,                    //
                          const QString &author,                  //
                          const QString &internalName,            //
@@ -32,6 +32,7 @@ namespace Qv2rayPlugin
               SpecialPluginType(specialTypes)
         {
         }
+        QvPluginMetadata(){};
     };
 
     class QvPluginEditor : QWidget
