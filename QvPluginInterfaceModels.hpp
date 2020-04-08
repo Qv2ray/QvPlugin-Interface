@@ -19,9 +19,14 @@ namespace Qv2rayPlugin
     };
     struct QvSystemProxyEventObject
     {
-        QString displayName;
         QMap<QvSystemProxyType, int> systemProxyPortSettings;
         QvSystemProxyStateType systemProxyState;
+        QvSystemProxyEventObject(){};
+        QvSystemProxyEventObject(const QMap<QvSystemProxyType, int> &port, const QvSystemProxyStateType &type)
+            : systemProxyPortSettings(port), //
+              systemProxyState(type)         //
+        {
+        }
     };
     //
     //
