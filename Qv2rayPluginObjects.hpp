@@ -52,7 +52,7 @@ namespace Qv2rayPlugin
         explicit QvPluginKernel(QObject *parent = nullptr) : QObject(parent){};
         // Events handlers
         /// Kernel related operations
-        virtual bool StartKernel(const QJsonObject) = 0;
+        virtual bool StartKernel(const QJsonObject &, const QString &) = 0;
         virtual bool StopKernel() = 0;
         /// Key = DisplayName, Value = protocol.
         virtual const QMap<QString, QString> GetKernelOutbounds() const = 0;
@@ -61,5 +61,6 @@ namespace Qv2rayPlugin
         /// Kernel related operations
         void OnKernelCrashed(const QString &);
         void OnKernelLogAvaliable(const QString &);
+        void OnKernelStatsAvailable(quint64 _t1, quint64 _t2);
     };
 } // namespace Qv2rayPlugin
