@@ -33,8 +33,6 @@ namespace Qv2rayPlugin
         virtual const QJsonObject GetSettngs() = 0;
         //
         //
-        // Should always return this.
-        virtual QObject *GetQObject() = 0;
         virtual QWidget *GetSettingsWidget() = 0;
         virtual QvPluginEditor *GetEditorWidget(UI_TYPE) = 0;
         virtual QvPluginKernel *GetKernel() = 0;
