@@ -48,8 +48,17 @@ namespace Qv2rayPlugin
     struct QvConnectivityEventObject
     {
         QString displayName;
-        QMap<QvSystemProxyType, int> inboundPorts;
+        QMap<QString, int> inboundPorts;
         QvConnectivityEventType eventType;
+        QvConnectivityEventObject()
+        {
+        }
+        QvConnectivityEventObject(const QString &name, const QMap<QString, int> &ports, const QvConnectivityEventType &event)
+            : displayName(name),   //
+              inboundPorts(ports), //
+              eventType(event)     //
+        {
+        }
     };
     //
     //
