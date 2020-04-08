@@ -97,7 +97,6 @@ namespace Qv2rayPlugin
     //
     enum CAPABILITY
     {
-        CAPABILITY_NONE,
         /// This plugin listens on group (Creation, Renaming, Modifying, Updating (subscription) and Removing)
         /// and connection               (Creation, Renaming, Modifying, Latency Testing and Removing)
         CAPABILITY_CONNECTION_ENTRY,
@@ -118,9 +117,7 @@ namespace Qv2rayPlugin
         /// This plugin is a connection kernel, providing new types of outbound.
         SPECIAL_TYPE_KERNEL,
         /// This plugin provides manual serialization of a connection,
-        SPECIAL_TYPE_SERIALIZOR,
-        /// No special things.
-        SPECIAL_TYPE_NONE
+        SPECIAL_TYPE_SERIALIZOR
     };
     Q_ENUM_NS(SPECIAL_TYPE)
     typedef QList<SPECIAL_TYPE> SPECIAL_TYPE_FLAGS;

@@ -2,8 +2,10 @@
 #include "QvPluginInterfaceModels.hpp"
 
 #include <QIcon>
+#include <QJsonObject>
 #include <QObject>
 #include <QWidget>
+
 namespace Qv2rayPlugin
 {
     struct QvPluginMetadata
@@ -46,14 +48,15 @@ namespace Qv2rayPlugin
     class QvPluginKernel : public QObject
     {
         Q_OBJECT
+      public:
+        explicit QvPluginKernel(QObject *parent = nullptr) : QObject(parent){};
         // Events handlers
         /// Kernel related operations
         virtual bool StartKernel(const QJsonObject) = 0;
         virtual bool StopKernel() = 0;
+        /// Key = DisplayName, Value = protocol.
+        virtual const QMap<QString, QString> GetKernelOutbounds() const = 0;
         //
-        /// A list of valid outbounds where this plugin is capable to handle, if any.
-        virtual QStringList OutboundTypes() const = 0;
-
       signals:
         /// Kernel related operations
         void OnKernelCrashed(const QString &);
