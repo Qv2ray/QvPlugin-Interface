@@ -1,9 +1,12 @@
 #pragma once
+#include <QIcon>
 #include <QMap>
 #include <QObject>
 namespace Qv2rayPlugin
 {
     Q_NAMESPACE
+    //
+
     //
     //
     //
@@ -121,4 +124,35 @@ namespace Qv2rayPlugin
     };
     Q_ENUM_NS(SPECIAL_TYPE)
     typedef QList<SPECIAL_TYPE> SPECIAL_TYPE_FLAGS;
+    //
+    //
+    //
+    struct QvPluginMetadata
+    {
+        QString Name;
+        QString Author;
+        QString InternalName;
+        QString Description;
+        QIcon Icon;
+        //
+        CAPABILITY_FLAGS Capabilities;
+        SPECIAL_TYPE_FLAGS SpecialPluginType;
+        QvPluginMetadata(const QString &name,                    //
+                         const QString &author,                  //
+                         const QString &internalName,            //
+                         const QString &description,             //
+                         const QIcon &icon,                      //
+                         const CAPABILITY_FLAGS &caps,           //
+                         const SPECIAL_TYPE_FLAGS &specialTypes) //
+            : Name(name),                                        //
+              Author(author),                                    //
+              InternalName(internalName),                        //
+              Description(description),                          //
+              Icon(icon),                                        //
+              Capabilities(caps),                                //
+              SpecialPluginType(specialTypes)
+        {
+        }
+        QvPluginMetadata(){};
+    };
 } // namespace Qv2rayPlugin

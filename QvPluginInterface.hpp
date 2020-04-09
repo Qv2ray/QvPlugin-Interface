@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Qv2rayPluginObjects.hpp"
 #include "Qv2rayPluginProcessor.hpp"
 
 #include <QFlags>
@@ -36,6 +35,7 @@ namespace Qv2rayPlugin
         virtual QWidget *GetSettingsWidget() = 0;
         virtual QvPluginEditor *GetEditorWidget(UI_TYPE) = 0;
         virtual QvPluginKernel *GetKernel() = 0;
+        virtual QvPluginSerializer *GetSerializer() = 0;
         virtual QvPluginEventHandler *GetEventHandler() = 0;
         //
         //
