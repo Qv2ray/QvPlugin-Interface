@@ -31,6 +31,9 @@ namespace Qv2rayPlugin
         //
         virtual void SetContent(const QJsonObject &) = 0;
         virtual const QJsonObject GetContent() const = 0;
+        //
+        virtual void SwitchOutbound(const QString &) = 0;
+        virtual QList<QvPluginOutboundObject> OutboundCapabilities() const = 0;
     };
 
     class QvPluginKernel : public QObject
@@ -39,10 +42,10 @@ namespace Qv2rayPlugin
       public:
         explicit QvPluginKernel(QObject *parent = nullptr) : QObject(parent){};
         /// Kernel related operations
-        virtual bool StartKernel(const QJsonObject &);
-        virtual bool StopKernel();
+        virtual bool StartKernel(const QJsonObject &) = 0;
+        virtual bool StopKernel() = 0;
         /// Key = DisplayName, Value = protocol.
-        virtual const QMap<QString, QString> GetKernelOutbounds() const;
+        virtual const QList<QvPluginOutboundObject> KernelOutboundCapabilities() const = 0;
         //
       signals:
         /// Kernel related operations

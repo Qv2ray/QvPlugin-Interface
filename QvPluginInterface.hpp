@@ -32,11 +32,11 @@ namespace Qv2rayPlugin
         virtual const QJsonObject GetSettngs() = 0;
         //
         //
-        virtual QWidget *GetSettingsWidget() = 0;
-        virtual QvPluginEditor *GetEditorWidget(UI_TYPE) = 0;
-        virtual QvPluginKernel *GetKernel() = 0;
-        virtual QvPluginSerializer *GetSerializer() = 0;
-        virtual QvPluginEventHandler *GetEventHandler() = 0;
+        virtual std::unique_ptr<QWidget> GetSettingsWidget() = 0;
+        virtual std::unique_ptr<QvPluginEditor> GetEditorWidget(UI_TYPE) = 0;
+        virtual std::shared_ptr<QvPluginKernel> GetKernel() = 0;
+        virtual std::shared_ptr<QvPluginSerializer> GetSerializer() = 0;
+        virtual std::shared_ptr<QvPluginEventHandler> GetEventHandler() = 0;
         //
         //
         virtual void PluginLog(const QString &) const = 0;

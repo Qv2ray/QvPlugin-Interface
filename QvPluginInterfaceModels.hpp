@@ -5,8 +5,11 @@
 namespace Qv2rayPlugin
 {
     Q_NAMESPACE
-    //
-
+    struct QvPluginOutboundObject
+    {
+        QString protocol;
+        QString displayName;
+    };
     //
     //
     //
