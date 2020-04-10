@@ -16,8 +16,13 @@ namespace Qv2rayPlugin
         Q_OBJECT
       public:
         explicit QvPluginSerializer(QObject *parent = nullptr) : QObject(parent){};
-        virtual const QString SerializeOutbound(const QJsonObject &) const = 0;
-        virtual const QJsonObject DeserializeOutbound(const QString &link, QString *alias, QString *errorMessage) const = 0;
+        virtual const QString SerializeOutbound(const QString &protocol,  //
+                                                const QString &alias,     //
+                                                const QString &groupName, //
+                                                const QJsonObject &object) const = 0;
+        virtual const QPair<QString, QJsonObject> DeserializeOutbound(const QString &link, QString *alias, QString *errorMessage) const = 0;
+        virtual const QList<QString> ShareLinkPrefixes() const = 0;
+        virtual const QList<QString> OutboundProtocols() const = 0;
     };
 
     class QvPluginEditor : public QWidget
