@@ -47,7 +47,8 @@ namespace Qv2rayPlugin
       public:
         explicit QvPluginKernel(QObject *parent = nullptr) : QObject(parent){};
         /// Kernel related operations
-        virtual bool StartKernel(const QJsonObject &) = 0;
+        virtual void SetConnectionSettings(const QString &listenAddress, const QMap<QString, int> &inbound, const QJsonObject &settings) = 0;
+        virtual bool StartKernel() = 0;
         virtual bool StopKernel() = 0;
         /// Key = DisplayName, Value = protocol.
         virtual const QList<QvPluginOutboundObject> KernelOutboundCapabilities() const = 0;
