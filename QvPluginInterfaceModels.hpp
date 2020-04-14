@@ -5,14 +5,27 @@
 namespace Qv2rayPlugin
 {
     Q_NAMESPACE
-    struct QvPluginOutboundObject
+    struct QvPluginOutboundProtocolObject
     {
         QString displayName;
         QString protocol;
+        QvPluginOutboundProtocolObject(){};
+        QvPluginOutboundProtocolObject(const QString &displayName, const QString &protocol) : displayName(displayName), protocol(protocol){};
     };
+    struct QvPluginOutboundInfoObject
+    {
+        QString protocol;
+        QString hostName;
+        int port;
+        QvPluginOutboundInfoObject(){};
+        QvPluginOutboundInfoObject(const QString &hostName, const QString &protocol, int port)
+            : protocol(protocol), //
+              hostName(hostName), //
+              port(port){};
+    };
+
     namespace Events
     {
-
         namespace SystemProxy
         {
             enum SystemProxyStateType

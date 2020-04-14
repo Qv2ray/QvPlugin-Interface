@@ -24,6 +24,7 @@ namespace Qv2rayPlugin
                                                 const QString &groupName, //
                                                 const QJsonObject &object) const = 0;
         virtual const QPair<QString, QJsonObject> DeserializeOutbound(const QString &link, QString *alias, QString *errorMessage) const = 0;
+        virtual const QvPluginOutboundInfoObject GetOutboundInfo(const QString &protocol, const QJsonObject &outbound) const = 0;
         virtual const QList<QString> ShareLinkPrefixes() const = 0;
         virtual const QList<QString> OutboundProtocols() const = 0;
     };
@@ -41,7 +42,7 @@ namespace Qv2rayPlugin
         virtual const QJsonObject GetContent() const = 0;
         //
         virtual void SwitchOutbound(const QString &) = 0;
-        virtual QList<QvPluginOutboundObject> OutboundCapabilities() const = 0;
+        virtual QList<QvPluginOutboundProtocolObject> OutboundCapabilities() const = 0;
     };
 
     class QvPluginKernel : public QObject
@@ -53,7 +54,7 @@ namespace Qv2rayPlugin
         virtual void SetConnectionSettings(const QString &listenAddress, const QMap<QString, int> &inbound, const QJsonObject &settings) = 0;
         virtual bool StartKernel() = 0;
         virtual bool StopKernel() = 0;
-        virtual const QList<QvPluginOutboundObject> KernelOutboundCapabilities() const = 0;
+        virtual const QList<QvPluginOutboundProtocolObject> KernelOutboundCapabilities() const = 0;
         //
       signals:
         /// Kernel related operations
