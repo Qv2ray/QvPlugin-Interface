@@ -11,4 +11,4 @@ find_package(Qt5 COMPONENTS Core Widgets REQUIRED)
 set(QVPLUGIN_INTERFACE_HEADERS
     ${QVPLUGIN_INTERFACE_INCLUDE_DIR}/QvPluginInterface.hpp
     ${QVPLUGIN_INTERFACE_INCLUDE_DIR}/QvPluginInterfaceModels.hpp
-    ${QVPLUGIN_INTERFACE_INCLUDE_DIR}/Qv2rayPluginProcessor.hpp)
+    ${QVPLUGIN_INTERFACE_INCLUDE_DIR}/QvPluginProcessor.hpp)

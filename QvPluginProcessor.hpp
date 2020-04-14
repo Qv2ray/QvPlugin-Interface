@@ -6,8 +6,11 @@
 #include <QObject>
 #include <QtWidgets>
 
-#define QVPlUGIN_DECL_EVENT_HANDLER(type) virtual void ProcessEvent_##type(const ::Qv2rayPlugin::Qv##type##EventObject &)
-#define QVPlUGIN_DECL_EVENT_HANDLER_OVERRIDE(type) QVPlUGIN_DECL_EVENT_HANDLER(type) override
+#define __QVPLUGIN_EVENT_HANDLER_SIG(type) const ::Qv2rayPlugin::Events::type::EventObject &pluginEvent
+#define __QVPLUGIN_DECL_EVENT_HANDLER(type) void ProcessEvent_##type(__QVPLUGIN_EVENT_HANDLER_SIG(type))
+
+#define QvPlugin_EventHandler_Decl(type) __QVPLUGIN_DECL_EVENT_HANDLER(type) override
+#define QvPlugin_EventHandler(className, type) void className::ProcessEvent_##type(__QVPLUGIN_EVENT_HANDLER_SIG(type))
 
 namespace Qv2rayPlugin
 {
@@ -50,7 +53,6 @@ namespace Qv2rayPlugin
         virtual void SetConnectionSettings(const QString &listenAddress, const QMap<QString, int> &inbound, const QJsonObject &settings) = 0;
         virtual bool StartKernel() = 0;
         virtual bool StopKernel() = 0;
-        /// Key = DisplayName, Value = protocol.
         virtual const QList<QvPluginOutboundObject> KernelOutboundCapabilities() const = 0;
         //
       signals:
@@ -65,9 +67,9 @@ namespace Qv2rayPlugin
         Q_OBJECT
       public:
         explicit QvPluginEventHandler(QObject *parent = nullptr) : QObject(parent){};
-        QVPlUGIN_DECL_EVENT_HANDLER(ConnectionStats){};
-        QVPlUGIN_DECL_EVENT_HANDLER(SystemProxy){};
-        QVPlUGIN_DECL_EVENT_HANDLER(Connectivity){};
-        QVPlUGIN_DECL_EVENT_HANDLER(ConnectionEntry){};
+        virtual __QVPLUGIN_DECL_EVENT_HANDLER(ConnectionStats){ Q_UNUSED(pluginEvent) };
+        virtual __QVPLUGIN_DECL_EVENT_HANDLER(SystemProxy){ Q_UNUSED(pluginEvent) };
+        virtual __QVPLUGIN_DECL_EVENT_HANDLER(Connectivity){ Q_UNUSED(pluginEvent) };
+        virtual __QVPLUGIN_DECL_EVENT_HANDLER(ConnectionEntry){ Q_UNUSED(pluginEvent) };
     };
 } // namespace Qv2rayPlugin

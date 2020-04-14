@@ -10,86 +10,86 @@ namespace Qv2rayPlugin
         QString displayName;
         QString protocol;
     };
-    //
-    //
-    //
-    enum QvSystemProxyStateType
+    namespace Events
     {
-        SystemProxyState_SetProxy,
-        SystemProxyState_ClearProxy
-    };
-    enum QvSystemProxyType
-    {
-        SystemProxy_HTTP,
-        SystemProxy_SOCKS
-    };
-    struct QvSystemProxyEventObject
-    {
-        QMap<QvSystemProxyType, int> systemProxyPortSettings;
-        QvSystemProxyStateType systemProxyState;
-        QvSystemProxyEventObject(){};
-        QvSystemProxyEventObject(const QMap<QvSystemProxyType, int> &port, const QvSystemProxyStateType &type)
-            : systemProxyPortSettings(port), //
-              systemProxyState(type)         //
+
+        namespace SystemProxy
         {
-        }
-    };
-    //
-    //
-    //
-    /// Struct holding information for connection stats events.
-    struct QvConnectionStatsEventObject
-    {
-        QString displayName;
-        quint64 upLinkSpeed;
-        quint64 downLinkSpeed;
-        int64_t upLinkData;
-        int64_t downLinkData;
-    };
-    //
-    //
-    //
-    enum QvConnectivityEventType
-    {
-        QvConnecticity_Connecting,
-        QvConnecticity_Connected,
-        QvConnecticity_Disconnecting,
-        QvConnecticity_Disconnected
-    };
-    struct QvConnectivityEventObject
-    {
-        QString displayName;
-        QMap<QString, int> inboundPorts;
-        QvConnectivityEventType eventType;
-        QvConnectivityEventObject()
+            enum SystemProxyStateType
+            {
+                SystemProxyState_SetProxy,
+                SystemProxyState_ClearProxy
+            };
+            enum SystemProxyType
+            {
+                SystemProxy_HTTP,
+                SystemProxy_SOCKS
+            };
+            struct EventObject
+            {
+                QMap<SystemProxyType, int> systemProxyPortSettings;
+                SystemProxyStateType systemProxyState;
+                EventObject(){};
+                EventObject(const QMap<SystemProxyType, int> &port, const SystemProxyStateType &type)
+                    : systemProxyPortSettings(port), //
+                      systemProxyState(type)         //
+                {
+                }
+            };
+        } // namespace SystemProxy
+        namespace ConnectionStats
         {
-        }
-        QvConnectivityEventObject(const QString &name, const QMap<QString, int> &ports, const QvConnectivityEventType &event)
-            : displayName(name),   //
-              inboundPorts(ports), //
-              eventType(event)     //
+            struct EventObject
+            {
+                QString displayName;
+                quint64 upLinkSpeed;
+                quint64 downLinkSpeed;
+                int64_t upLinkData;
+                int64_t downLinkData;
+            };
+        } // namespace ConnectionStats
+        namespace Connectivity
         {
-        }
-    };
-    //
-    //
-    //
-    enum QvConnectionEntryEventType
-    {
-        ConnectionEvent_Created,
-        ConnectionEvent_Renamed,
-        ConnectionEvent_Updated,
-        ConnectionEvent_Deleted
-    };
-    struct QvConnectionEntryEventObject
-    {
-        QString displayName;
-        QString originalDisplayName;
-        QvConnectionEntryEventType eventType;
-    };
-    //
-    //
-    //
+            enum EventType
+            {
+                QvConnecticity_Connecting,
+                QvConnecticity_Connected,
+                QvConnecticity_Disconnecting,
+                QvConnecticity_Disconnected
+            };
+            struct EventObject
+            {
+                QString displayName;
+                QMap<QString, int> inboundPorts;
+                EventType eventType;
+                EventObject()
+                {
+                }
+                EventObject(const QString &name, const QMap<QString, int> &ports, const EventType &event)
+                    : displayName(name),   //
+                      inboundPorts(ports), //
+                      eventType(event)     //
+                      {};
+            };
+        } // namespace Connectivity
+
+        namespace ConnectionEntry
+        {
+            enum EventType
+            {
+                ConnectionEvent_Created,
+                ConnectionEvent_Renamed,
+                ConnectionEvent_Updated,
+                ConnectionEvent_Deleted
+            };
+            struct EventObject
+            {
+                QString displayName;
+                QString originalDisplayName;
+                EventType eventType;
+            };
+        } // namespace ConnectionEntry
+    }     // namespace Events
     enum UI_TYPE
     {
         /// The UI in the Outbound Editor
@@ -115,9 +115,7 @@ namespace Qv2rayPlugin
     };
     Q_ENUM_NS(CAPABILITY)
     typedef QList<CAPABILITY> CAPABILITY_FLAGS;
-    //
-    //
-    //
+
     enum SPECIAL_TYPE
     {
         /// This plugin is a connection kernel, providing new types of outbound.
@@ -127,9 +125,7 @@ namespace Qv2rayPlugin
     };
     Q_ENUM_NS(SPECIAL_TYPE)
     typedef QList<SPECIAL_TYPE> SPECIAL_TYPE_FLAGS;
-    //
-    //
-    //
+
     struct QvPluginMetadata
     {
         QString Name;
