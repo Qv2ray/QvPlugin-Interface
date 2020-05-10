@@ -30,8 +30,8 @@ namespace Qv2rayPlugin
         {
             enum SystemProxyStateType
             {
-                SystemProxyState_SetProxy,
-                SystemProxyState_ClearProxy
+                SetProxy,
+                ClearProxy
             };
             enum SystemProxyType
             {
@@ -65,10 +65,10 @@ namespace Qv2rayPlugin
         {
             enum EventType
             {
-                QvConnecticity_Connecting,
-                QvConnecticity_Connected,
-                QvConnecticity_Disconnecting,
-                QvConnecticity_Disconnected
+                Connecting,
+                Connected,
+                Disconnecting,
+                Disconnected
             };
             struct EventObject
             {
@@ -90,16 +90,19 @@ namespace Qv2rayPlugin
         {
             enum EventType
             {
-                ConnectionEvent_Created,
-                ConnectionEvent_Renamed,
-                ConnectionEvent_Updated,
-                ConnectionEvent_Deleted
+                Created,
+                Edited,
+                Renamed,
+                LinkedWithGroup,
+                RemovedFromGroup,
+                FullyRemoved
             };
             struct EventObject
             {
+                EventType eventType;
+                //
                 QString displayName;
                 QString originalDisplayName;
-                EventType eventType;
             };
         } // namespace ConnectionEntry
     }     // namespace Events
