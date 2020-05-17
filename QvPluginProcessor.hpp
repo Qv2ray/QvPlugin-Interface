@@ -87,7 +87,7 @@ namespace Qv2rayPlugin
       signals:
         /// Kernel related operations
         void OnKernelCrashed(const QString &);
-        void OnKernelLogAvaliable(const QString &);
+        void OnKernelLogAvailable(const QString &);
         void OnKernelStatsAvailable(quint64 upSpeed, quint64 downSpeed);
 
       private:
