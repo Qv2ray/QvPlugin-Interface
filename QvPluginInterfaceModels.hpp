@@ -45,9 +45,7 @@ namespace Qv2rayPlugin
                 EventObject(){};
                 EventObject(const QMap<SystemProxyType, int> &port, const SystemProxyStateType &type)
                     : systemProxyPortSettings(port), //
-                      systemProxyState(type)         //
-                {
-                }
+                      systemProxyState(type){};
             };
         } // namespace SystemProxy
         namespace ConnectionStats
@@ -75,14 +73,9 @@ namespace Qv2rayPlugin
                 QString displayName;
                 QMap<QString, int> inboundPorts;
                 EventType eventType;
-                EventObject()
-                {
-                }
+                EventObject(){};
                 EventObject(const QString &name, const QMap<QString, int> &ports, const EventType &event)
-                    : displayName(name),   //
-                      inboundPorts(ports), //
-                      eventType(event)     //
-                      {};
+                    : displayName(name), inboundPorts(ports), eventType(event){};
             };
         } // namespace Connectivity
 
@@ -149,6 +142,7 @@ namespace Qv2rayPlugin
         QString InternalName;
         QString Description;
         QIcon Icon;
+        QList<QvPluginOutboundProtocolObject> KernelOutboundCapabilities;
         //
         CAPABILITY_FLAGS Capabilities;
         SPECIAL_TYPE_FLAGS SpecialPluginType;
@@ -165,9 +159,8 @@ namespace Qv2rayPlugin
               Description(description),                          //
               Icon(icon),                                        //
               Capabilities(caps),                                //
-              SpecialPluginType(specialTypes)
-        {
-        }
+              SpecialPluginType(specialTypes)                    //
+              {};
         QvPluginMetadata(){};
     };
 } // namespace Qv2rayPlugin

@@ -37,8 +37,8 @@ namespace Qv2rayPlugin
         /// \returns A unique pointer to the QvPluginEditor instance.
         virtual std::unique_ptr<QvPluginEditor> GetEditorWidget(UI_TYPE) = 0;
         /// \brief Get Kernel Instance if the QvPluginMetadata contains SPECIAL_TYPE_KERNEL
-        /// \warning The owner of this QvPluginKernel instance is the plugin instance itself.
-        virtual std::shared_ptr<QvPluginKernel> GetKernel() = 0;
+        /// \warning The owner of QvPluginKernel instance will be transfered to its caller.
+        virtual std::unique_ptr<QvPluginKernel> CreateKernel() = 0;
         /// \brief Get Serializer Instance if the QvPluginMetadata contains SPECIAL_TYPE_SERIALIZOR
         /// \warning The owner of this QvPluginSerializer instance is the plugin instance itself.
         virtual std::shared_ptr<QvPluginSerializer> GetSerializer() = 0;

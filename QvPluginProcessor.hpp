@@ -49,18 +49,49 @@ namespace Qv2rayPlugin
     {
         Q_OBJECT
       public:
-        explicit QvPluginKernel(QObject *parent = nullptr) : QObject(parent){};
+        enum KernelSetting
+        {
+            KERNEL_HTTP_ENABLED,
+            KERNEL_HTTP_PORT,
+            KERNEL_SOCKS_ENABLED,
+            KERNEL_SOCKS_PORT,
+            KERNEL_SOCKS_UDP_ENABLED,
+            KERNEL_SOCKS_LOCAL_ADDRESS,
+            KERNEL_LISTEN_ADDRESS
+        };
+        explicit QvPluginKernel(QObject *parent = nullptr) : QObject(parent)
+        {
+#ifdef QT_DEBUG
+            qDebug() << "QvPluginKernel construct";
+#endif
+        };
+        virtual ~QvPluginKernel()
+        {
+#ifdef QT_DEBUG
+            qDebug() << "QvPluginKernel destruct";
+#endif
+        }
         /// Kernel related operations
-        virtual void SetConnectionSettings(const QString &listenAddress, const QMap<QString, int> &inbound, const QJsonObject &settings) = 0;
+        virtual void SetConnectionSettings(const QMap<KernelSetting, QVariant> &settings, const QJsonObject &connectionInfo) = 0;
         virtual bool StartKernel() = 0;
         virtual bool StopKernel() = 0;
-        virtual const QList<QvPluginOutboundProtocolObject> KernelOutboundCapabilities() const = 0;
+        virtual void SetKernelId(const QString &kId) final
+        {
+            __qvKernelId = kId;
+        };
+        virtual const QString GetKernelId() const final
+        {
+            return __qvKernelId;
+        };
         //
       signals:
         /// Kernel related operations
         void OnKernelCrashed(const QString &);
         void OnKernelLogAvaliable(const QString &);
         void OnKernelStatsAvailable(quint64 upSpeed, quint64 downSpeed);
+
+      private:
+        QString __qvKernelId;
     };
 
     class QvPluginEventHandler : public QObject
