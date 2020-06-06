@@ -141,6 +141,7 @@ namespace Qv2rayPlugin
         QString Author;
         QString InternalName;
         QString Description;
+        QString VersionString;
         QIcon Icon;
         QList<QvPluginOutboundProtocolObject> KernelOutboundCapabilities;
         //
