@@ -43,7 +43,8 @@ namespace Qv2rayPlugin
 
         bool HttpProxy::httpListen(const QHostAddress &http_addr, uint16_t http_port, uint16_t socks_port)
         {
-            upstreamProxy = QNetworkProxy(QNetworkProxy::Socks5Proxy, "127.0.0.1", socks_port);
+            bool isAny = http_addr == QHostAddress::AnyIPv4 || http_addr == QHostAddress::AnyIPv6;
+            upstreamProxy = QNetworkProxy(QNetworkProxy::Socks5Proxy, isAny ? "127.0.0.1" : http_addr.toString(), socks_port);
             return this->listen(http_addr, http_port);
         }
 
@@ -52,8 +53,7 @@ namespace Qv2rayPlugin
             QTcpSocket *socket = new QTcpSocket(this);
             connect(socket, &QTcpSocket::readyRead, this, &HttpProxy::onSocketReadyRead);
             connect(socket, &QTcpSocket::disconnected, socket, &QTcpSocket::deleteLater);
-            connect(socket, static_cast<void (QTcpSocket::*)(QAbstractSocket::SocketError)>(&QTcpSocket::error), this,
-                    &HttpProxy::onSocketError);
+            connect(socket, &QAbstractSocket::errorOccurred, this, &HttpProxy::onSocketError);
             socket->setSocketDescriptor(socketDescriptor);
         }
 
@@ -136,8 +136,7 @@ namespace Qv2rayPlugin
                 connect(proxySocket, &QTcpSocket::connected, this, &HttpProxy::onProxySocketConnectedHttps);
             }
             connect(proxySocket, &QTcpSocket::disconnected, proxySocket, &QTcpSocket::deleteLater);
-            connect(proxySocket, static_cast<void (QTcpSocket::*)(QAbstractSocket::SocketError)>(&QTcpSocket::error), this,
-                    &HttpProxy::onSocketError);
+            connect(proxySocket, &QAbstractSocket::errorOccurred, this, &HttpProxy::onSocketError);
             proxySocket->connectToHost(host, port);
         }
 
