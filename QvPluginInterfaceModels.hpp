@@ -53,10 +53,10 @@ namespace Qv2rayPlugin
             struct EventObject
             {
                 QString displayName;
-                quint64 upLinkSpeed;
-                quint64 downLinkSpeed;
-                int64_t upLinkData;
-                int64_t downLinkData;
+                long upLinkSpeed;
+                long downLinkSpeed;
+                quint64 upLinkData;
+                quint64 downLinkData;
             };
         } // namespace ConnectionStats
         namespace Connectivity
