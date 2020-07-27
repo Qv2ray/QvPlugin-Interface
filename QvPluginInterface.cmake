@@ -11,13 +11,9 @@ find_package(Qt5 COMPONENTS Core Widgets REQUIRED)
 if(QVPLUGIN_HAS_HTTP_TO_SOCKS_HELPER)
     find_package(Qt5 COMPONENTS Network REQUIRED)
     set(QVPLUGIN_HTTP_TO_SOCKS_FILES
-        ${QVPLUGIN_INTERFACE_INCLUDE_DIR}/utils/HttpProxy.cpp
         ${QVPLUGIN_INTERFACE_INCLUDE_DIR}/utils/HttpProxy.hpp
-        ${QVPLUGIN_INTERFACE_INCLUDE_DIR}/utils/SocketStream.cpp
         ${QVPLUGIN_INTERFACE_INCLUDE_DIR}/utils/SocketStream.hpp
         )
-else()
-    set(QVPLUGIN_HTTP_TO_SOCKS_FILES "")
 endif()
 
 set(QVPLUGIN_INTERFACE_HEADERS

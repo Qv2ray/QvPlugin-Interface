@@ -37,7 +37,17 @@ namespace Qv2rayPlugin
              * all available data from socket a will be written to socket b
              * vice versa
              */
-            SocketStream(QAbstractSocket *a, QAbstractSocket *b, QObject *parent = 0);
+            SocketStream(QAbstractSocket *a, QAbstractSocket *b, QObject *parent = 0) : QObject(parent), m_as(a), m_bs(b)
+            {
+                connect(m_as, &QAbstractSocket::readyRead, this, &SocketStream::onSocketAReadyRead);
+                connect(m_bs, &QAbstractSocket::readyRead, this, &SocketStream::onSocketBReadyRead);
+            }
+
+            ~SocketStream()
+            {
+                qDebug() << "Socket Stream DCtor";
+            }
+
             SocketStream(const SocketStream &) = delete;
 
           private:
@@ -45,8 +55,28 @@ namespace Qv2rayPlugin
             QAbstractSocket *m_bs;
 
           private slots:
-            void onSocketAReadyRead();
-            void onSocketBReadyRead();
+            void onSocketAReadyRead()
+            {
+                if (m_bs->isWritable())
+                {
+                    m_bs->write(m_as->readAll());
+                }
+                else
+                {
+                    qCritical("The second socket is not writable");
+                }
+            }
+            void onSocketBReadyRead()
+            {
+                if (m_as->isWritable())
+                {
+                    m_as->write(m_bs->readAll());
+                }
+                else
+                {
+                    qCritical("The first socket is not writable");
+                }
+            }
         };
     } // namespace Utils
 } // namespace Qv2rayPlugin
