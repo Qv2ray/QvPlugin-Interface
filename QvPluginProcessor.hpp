@@ -4,7 +4,7 @@
 
 #include <QJsonObject>
 #include <QObject>
-#include <QtWidgets>
+#include <QtWidgets/QWidget>
 
 #define __QVPLUGIN_EVENT_HANDLER_SIG(type) const ::Qv2rayPlugin::Events::type::EventObject &pluginEvent
 #define __QVPLUGIN_DECL_EVENT_HANDLER(type) void ProcessEvent_##type(__QVPLUGIN_EVENT_HANDLER_SIG(type))

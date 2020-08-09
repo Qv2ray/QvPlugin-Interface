@@ -1,7 +1,7 @@
 #pragma once
-#include <QIcon>
 #include <QMap>
 #include <QObject>
+#include <QtGui/QIcon>
 namespace Qv2rayPlugin
 {
     Q_NAMESPACE

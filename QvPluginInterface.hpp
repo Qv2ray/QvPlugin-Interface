@@ -5,7 +5,6 @@
 #include <QJsonObject>
 #include <QObject>
 #include <QString>
-#include <QWidget>
 #include <memory>
 
 constexpr auto QV2RAY_PLUGIN_INTERFACE_VERSION = 3;
