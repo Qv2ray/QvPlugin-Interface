@@ -8,7 +8,7 @@
 #include <QWidget>
 #include <memory>
 
-constexpr auto QV2RAY_PLUGIN_INTERFACE_VERSION = 2;
+constexpr auto QV2RAY_PLUGIN_INTERFACE_VERSION = 3;
 
 namespace Qv2rayPlugin
 {
