@@ -4,8 +4,9 @@
 #include "QvPluginProcessor.hpp"
 namespace Qv2rayPlugin
 {
-    class Qv2rayPluginGUIFactory;
-
+    class Qv2rayPluginGUIInterface;
+    class QvPluginEditor;
+    class QvPluginSettingsWidget;
     class Qv2rayInterface;
     inline Qv2rayInterface *pluginInstance = nullptr;
 
@@ -14,7 +15,7 @@ namespace Qv2rayPlugin
         friend class PluginOutboundHandler;
         friend class PluginKernel;
         friend class PluginEventHandler;
-        friend class Qv2rayPluginGUIFactory;
+        friend class Qv2rayPluginGUIInterface;
 
       public:
         const int QvPluginInterfaceVersion = QV2RAY_PLUGIN_INTERFACE_VERSION;
@@ -28,7 +29,7 @@ namespace Qv2rayPlugin
         virtual std::unique_ptr<PluginKernel> CreateKernel() const = 0;
         virtual QList<QString> GetKernelProtocols() const = 0;
         //
-        virtual std::unique_ptr<Qv2rayPluginGUIFactory> GetGUIFactory() const = 0;
+        virtual Qv2rayPluginGUIInterface *GetGUIInterface() const = 0;
         //
         // Signals
         virtual void PluginLog(const QString &) const = 0;
@@ -52,6 +53,6 @@ namespace Qv2rayPlugin
 } // namespace Qv2rayPlugin
 
 QT_BEGIN_NAMESPACE
-#define Qv2rayPluginInterfaceCollection_IID "com.github.Qv2ray.Qv2rayPluginCollectionInterface"
-Q_DECLARE_INTERFACE(Qv2rayPlugin::Qv2rayInterface, Qv2rayPluginInterfaceCollection_IID)
+#define Qv2rayInterface_IID "com.github.Qv2ray.Qv2rayPluginInterface"
+Q_DECLARE_INTERFACE(Qv2rayPlugin::Qv2rayInterface, Qv2rayInterface_IID)
 QT_END_NAMESPACE

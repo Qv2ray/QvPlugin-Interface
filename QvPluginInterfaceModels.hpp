@@ -1,31 +1,13 @@
 #pragma once
 
+#include "QvPluginBase.hpp"
+
 #include <QMap>
 #include <QObject>
 
 namespace Qv2rayPlugin
 {
     Q_NAMESPACE
-
-    enum OutboundInfoFlags
-    {
-        INFO_PROTOCOL = 0,
-        INFO_SERVER = 1,
-        INFO_PORT = 2,
-        INFO_SNI = 3
-    };
-
-    enum KernelOptionFlags
-    {
-        KERNEL_HTTP_ENABLED,
-        KERNEL_HTTP_PORT,
-        KERNEL_SOCKS_ENABLED,
-        KERNEL_SOCKS_PORT,
-        KERNEL_SOCKS_UDP_ENABLED,
-        KERNEL_SOCKS_LOCAL_ADDRESS,
-        KERNEL_LISTEN_ADDRESS
-    };
-
     namespace Events
     {
         namespace SystemProxy

@@ -8,6 +8,7 @@ endif()
 
 if(QVPLUGIN_HAS_HTTP_TO_SOCKS_HELPER)
     find_package(Qt5 COMPONENTS Network REQUIRED)
+    list(APPEND QV2RAY_QT_LIBS Qt5::Network)
     set(QVPLUGIN_HTTP_TO_SOCKS_FILES
         ${QVPLUGIN_INTERFACE_INCLUDE_DIR}/utils/HttpProxy.hpp
         ${QVPLUGIN_INTERFACE_INCLUDE_DIR}/utils/SocketStream.hpp
@@ -21,4 +22,3 @@ set(QVPLUGIN_INTERFACE_HEADERS
     ${QVPLUGIN_INTERFACE_INCLUDE_DIR}/QvPluginInterfaceModels.hpp
     ${QVPLUGIN_INTERFACE_INCLUDE_DIR}/QvPluginProcessor.hpp)
 
-list(APPEND QV2RAY_QT_LIBS Qt5::Network)

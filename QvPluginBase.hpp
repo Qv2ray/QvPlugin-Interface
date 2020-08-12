@@ -25,6 +25,28 @@ namespace Qv2rayPlugin
         COMPONENT_EVENT_HANDLER = 6
     };
 
+    enum OutboundInfoFlags
+    {
+        INFO_DISPLAYNAME = 0,
+        INFO_PROTOCOL = 1,
+        INFO_SERVER = 2,
+        INFO_PORT = 3,
+        INFO_SNI = 4
+    };
+
+    enum KernelOptionFlags
+    {
+        KERNEL_HTTP_ENABLED,
+        KERNEL_HTTP_PORT,
+        KERNEL_SOCKS_ENABLED,
+        KERNEL_SOCKS_PORT,
+        KERNEL_SOCKS_UDP_ENABLED,
+        KERNEL_SOCKS_LOCAL_ADDRESS,
+        KERNEL_LISTEN_ADDRESS
+    };
+
+    typedef QMap<OutboundInfoFlags, QVariant> OutboundInfoObject;
+
     struct QvPluginMetadata
     {
         QString Name;

@@ -23,7 +23,7 @@ namespace Qv2rayPlugin
                                                 const QString &groupName, //
                                                 const QJsonObject &object) const = 0;
         virtual const QPair<QString, QJsonObject> DeserializeOutbound(const QString &link, QString *alias, QString *errorMessage) const = 0;
-        virtual const QMap<OutboundInfoFlags, QVariant> GetOutboundInfo(const QString &protocol, const QJsonObject &outbound) const = 0;
+        virtual const OutboundInfoObject GetOutboundInfo(const QString &protocol, const QJsonObject &outbound) const = 0;
         virtual const QMap<QString, QString> SupportedProtocols() const = 0;
     };
 
