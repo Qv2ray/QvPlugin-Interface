@@ -41,7 +41,7 @@ namespace Qv2rayPlugin
     {
       public:
         explicit Qv2rayPluginGUIInterface(){};
-        virtual ~Qv2rayPluginGUIInterface() = 0;
+        virtual ~Qv2rayPluginGUIInterface(){};
         virtual QIcon Icon() const = 0;
         /// Qv2ray will take the ownership.
         virtual std::unique_ptr<QvPluginSettingsWidget> GetSettingsWidget() const = 0;
