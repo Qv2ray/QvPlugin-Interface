@@ -3,26 +3,35 @@
 #include <QJsonObject>
 #include <QObject>
 #include <QString>
+#include <QVariant>
 #include <memory>
 
 constexpr auto QV2RAY_PLUGIN_INTERFACE_VERSION = 3;
+
 namespace Qv2rayPlugin
 {
-    enum class PluginUpdateType
+    enum PluginUpdateType
     {
-        GITHUB_RELEASE = 0,
-        URL = 1
+        UPDATE_NONE = 0,
+        UPDATE_GITHUB_RELEASE = 1,
+        UPDATE_URL = 2
+    };
+
+    enum PluginGuiComponentType
+    {
+        GUI_COMPONENT_SETTINGS = 0,
+        GUI_COMPONENT_OUTBOUND_EDITOR = 1,
+        GUI_COMPONENT_INBOUND_EDITOR = 2,
+        GUI_COMPONENT_MAINWINDOW_WIDGET = 3
     };
 
     enum PluginComponentType
     {
-        COMPONENT_OUTBOUND_HANDLER = 0,
-        COMPONENT_KERNEL = 1,
-        COMPONENT_SUBSCRIPTION_ADAPTER = 2,
-        COMPONENT_OUTBOUND_EDITOR = 3,
-        COMPONENT_INBOUND_EDITOR = 4,
-        COMPONENT_MAINWINDOW_WIDGET = 5,
-        COMPONENT_EVENT_HANDLER = 6
+        COMPONENT_EVENT_HANDLER = 0,
+        COMPONENT_GUI = 1,
+        COMPONENT_KERNEL = 2,
+        COMPONENT_OUTBOUND_HANDLER = 3,
+        COMPONENT_SUBSCRIPTION_ADAPTER = 4,
     };
 
     enum OutboundInfoFlags
@@ -45,6 +54,18 @@ namespace Qv2rayPlugin
         KERNEL_LISTEN_ADDRESS
     };
 
+    struct ProtocolInfoObject
+    {
+      public:
+        QString protocol;
+        QString displayName;
+        explicit ProtocolInfoObject(const QString &protocol, const QString &displayName) : protocol(protocol), displayName(displayName){};
+        friend bool operator==(const ProtocolInfoObject &l, const ProtocolInfoObject &r)
+        {
+            return l.protocol == r.protocol && l.displayName == r.displayName;
+        }
+    };
+
     typedef QMap<OutboundInfoFlags, QVariant> OutboundInfoObject;
 
     struct QvPluginMetadata
@@ -54,7 +75,8 @@ namespace Qv2rayPlugin
         QString InternalName;
         QString Description;
         QString VersionString;
-        QString UpdateUrl;
+        QString UpdateLocation;
+        PluginUpdateType UpdateType;
         QList<PluginComponentType> Components;
         QvPluginMetadata(const QString &name,                                   //
                          const QString &author,                                 //
@@ -62,15 +84,16 @@ namespace Qv2rayPlugin
                          const QString &description,                            //
                          const QString &versionString,                          //
                          const QString &updateUrl,                              //
-                         const QList<PluginComponentType> &supportedComponents) //
+                         const QList<PluginComponentType> &supportedComponents, //
+                         const PluginUpdateType updateType)                     //
             : Name(name),                                                       //
               Author(author),                                                   //
               InternalName(internalName),                                       //
               Description(description),                                         //
               VersionString(versionString),                                     //
-              UpdateUrl(updateUrl),                                             //
-              Components(supportedComponents)                                   //
-              {};
+              UpdateLocation(updateUrl),                                        //
+              UpdateType(updateType),                                           //
+              Components(supportedComponents){};                                //
         QvPluginMetadata(){};
     };
 } // namespace Qv2rayPlugin

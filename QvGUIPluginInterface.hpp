@@ -21,34 +21,56 @@ namespace Qv2rayPlugin
         virtual ~QvPluginMainWindowWidget() = 0;
         virtual const QList<QMenu *> GetMenus() = 0;
     };
+
     class QvPluginEditor : public QWidget
     {
         Q_OBJECT
       public:
         explicit QvPluginEditor(QWidget *parent = nullptr) : QWidget(parent){};
         //
-        virtual void SetHostInfo(const QString &address, int port) = 0;
-        virtual QPair<QString, int> GetHostInfo() const = 0;
+        virtual void SetHostAddress(const QString &address, int port) = 0;
+        virtual QPair<QString, int> GetHostAddress() const = 0;
         //
         virtual void SetContent(const QJsonObject &) = 0;
         virtual const QJsonObject GetContent() const = 0;
-        //
-        virtual void SwitchOutbound(const QString &) = 0;
-        virtual QList<OutboundInfoObject> OutboundCapabilities() const = 0;
+
+      protected:
+        QJsonObject content;
     };
 
-    class Qv2rayPluginGUIInterface
+#define AddEditor(type, protocol, displayName, editorType)                                                                                      \
+    this->type##Editors.append({ ProtocolInfoObject{ protocol, displayName }, std::make_unique<editorType>() })
+
+    class PluginGUIInterface
     {
       public:
-        explicit Qv2rayPluginGUIInterface(){};
-        virtual ~Qv2rayPluginGUIInterface(){};
+        using typed_plugin_editor = QPair<ProtocolInfoObject, std::shared_ptr<QvPluginEditor>>;
+        explicit PluginGUIInterface(){};
+        virtual ~PluginGUIInterface(){};
         virtual QIcon Icon() const = 0;
-        /// Qv2ray will take the ownership.
-        virtual std::unique_ptr<QvPluginSettingsWidget> GetSettingsWidget() const = 0;
-        /// Qv2ray will NOT take the ownership.
-        virtual std::shared_ptr<QvPluginEditor> GetInboundEditor() const = 0;
-        virtual std::shared_ptr<QvPluginEditor> GetOutboundEditor() const = 0;
-        virtual std::shared_ptr<QvPluginMainWindowWidget> GetMainWindowWidget() const = 0;
+        virtual QList<PluginGuiComponentType> GetComponents() const = 0;
+        virtual std::shared_ptr<QvPluginSettingsWidget> GetSettingsWidget() const final
+        {
+            return settingsWidget;
+        }
+        virtual QList<typed_plugin_editor> GetInboundEditors() const final
+        {
+            return inboundEditors;
+        }
+        virtual QList<typed_plugin_editor> GetOutboundEditors() const final
+        {
+            return outboundEditors;
+        }
+        virtual std::shared_ptr<QvPluginMainWindowWidget> GetMainWindowWidget() const final
+        {
+            return mainWindowWidget;
+        }
+
+      protected:
+        std::shared_ptr<QvPluginSettingsWidget> settingsWidget;
+        QList<typed_plugin_editor> inboundEditors;
+        QList<typed_plugin_editor> outboundEditors;
+        std::shared_ptr<QvPluginMainWindowWidget> mainWindowWidget;
     };
 
 } // namespace Qv2rayPlugin

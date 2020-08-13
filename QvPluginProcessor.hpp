@@ -13,11 +13,10 @@
 
 namespace Qv2rayPlugin
 {
-    class PluginOutboundHandler : public QObject
+    class PluginOutboundHandler
     {
-        Q_OBJECT
       public:
-        explicit PluginOutboundHandler(QObject *parent = nullptr) : QObject(parent){};
+        explicit PluginOutboundHandler();
         virtual const QString SerializeOutbound(const QString &protocol,  //
                                                 const QString &alias,     //
                                                 const QString &groupName, //
@@ -27,11 +26,18 @@ namespace Qv2rayPlugin
         virtual const QMap<QString, QString> SupportedProtocols() const = 0;
     };
 
+    class PluginSubscriptionAdapter
+    {
+      public:
+        explicit PluginSubscriptionAdapter();
+        virtual ~PluginSubscriptionAdapter(){};
+    };
+
     class PluginKernel : public QObject
     {
         Q_OBJECT
       public:
-        explicit PluginKernel(QObject *parent = nullptr) : QObject(parent){};
+        explicit PluginKernel() : QObject(){};
         virtual ~PluginKernel(){};
         virtual void SetConnectionSettings(const QMap<KernelOptionFlags, QVariant> &settings, const QJsonObject &connectionInfo) = 0;
         virtual bool StartKernel() = 0;
@@ -46,11 +52,16 @@ namespace Qv2rayPlugin
         QString __qvKernelId;
     };
 
-    class PluginEventHandler : public QObject
+    class PluginKernelInterface
     {
-        Q_OBJECT
+        virtual std::unique_ptr<PluginKernel> CreateKernel() const = 0;
+        virtual QList<QString> GetKernelProtocols() const = 0;
+    };
+
+    class PluginEventHandler
+    {
       public:
-        explicit PluginEventHandler(QObject *parent = nullptr) : QObject(parent){};
+        explicit PluginEventHandler();
         virtual __QVPLUGIN_DECL_EVENT_HANDLER(ConnectionStats){ Q_UNUSED(pluginEvent) };
         virtual __QVPLUGIN_DECL_EVENT_HANDLER(SystemProxy){ Q_UNUSED(pluginEvent) };
         virtual __QVPLUGIN_DECL_EVENT_HANDLER(Connectivity){ Q_UNUSED(pluginEvent) };
