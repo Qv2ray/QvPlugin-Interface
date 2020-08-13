@@ -16,7 +16,7 @@ namespace Qv2rayPlugin
     class PluginOutboundHandler
     {
       public:
-        explicit PluginOutboundHandler();
+        explicit PluginOutboundHandler(){};
         virtual const QString SerializeOutbound(const QString &protocol,  //
                                                 const QString &alias,     //
                                                 const QString &groupName, //
@@ -29,7 +29,7 @@ namespace Qv2rayPlugin
     class PluginSubscriptionAdapter
     {
       public:
-        explicit PluginSubscriptionAdapter();
+        explicit PluginSubscriptionAdapter(){};
         virtual ~PluginSubscriptionAdapter(){};
     };
 
@@ -61,7 +61,7 @@ namespace Qv2rayPlugin
     class PluginEventHandler
     {
       public:
-        explicit PluginEventHandler();
+        explicit PluginEventHandler(){};
         virtual __QVPLUGIN_DECL_EVENT_HANDLER(ConnectionStats){ Q_UNUSED(pluginEvent) };
         virtual __QVPLUGIN_DECL_EVENT_HANDLER(SystemProxy){ Q_UNUSED(pluginEvent) };
         virtual __QVPLUGIN_DECL_EVENT_HANDLER(Connectivity){ Q_UNUSED(pluginEvent) };

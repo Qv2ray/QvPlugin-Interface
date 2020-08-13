@@ -11,14 +11,14 @@ namespace Qv2rayPlugin
         Q_OBJECT
       public:
         explicit QvPluginSettingsWidget(QWidget *parent) : QWidget(parent){};
-        virtual ~QvPluginSettingsWidget() = 0;
+        virtual ~QvPluginSettingsWidget(){};
     };
     class QvPluginMainWindowWidget : public QWidget
     {
         Q_OBJECT
       public:
         explicit QvPluginMainWindowWidget(QWidget *parent) : QWidget(parent){};
-        virtual ~QvPluginMainWindowWidget() = 0;
+        virtual ~QvPluginMainWindowWidget(){};
         virtual const QList<QMenu *> GetMenus() = 0;
     };
 
@@ -27,6 +27,7 @@ namespace Qv2rayPlugin
         Q_OBJECT
       public:
         explicit QvPluginEditor(QWidget *parent = nullptr) : QWidget(parent){};
+        virtual ~QvPluginEditor(){};
         //
         virtual void SetHostAddress(const QString &address, int port) = 0;
         virtual QPair<QString, int> GetHostAddress() const = 0;
