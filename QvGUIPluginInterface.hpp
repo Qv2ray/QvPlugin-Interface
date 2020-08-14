@@ -39,13 +39,16 @@ namespace Qv2rayPlugin
         QJsonObject content;
     };
 
-#define AddEditor(type, protocol, displayName, editorType)                                                                                      \
-    this->type##Editors.append({ ProtocolInfoObject{ protocol, displayName }, std::make_unique<editorType>() })
+    template<typename T>
+    inline QPair<ProtocolInfoObject, T *> MakeEditorInfoPair(const QString &protocol, const QString &displayName)
+    {
+        return { ProtocolInfoObject(protocol, displayName), new T() };
+    }
 
     class PluginGUIInterface
     {
       public:
-        using typed_plugin_editor = QPair<ProtocolInfoObject, std::unique_ptr<QvPluginEditor>>;
+        using typed_plugin_editor = QPair<ProtocolInfoObject, QvPluginEditor *>;
         explicit PluginGUIInterface(){};
         virtual ~PluginGUIInterface(){};
         virtual QIcon Icon() const = 0;
