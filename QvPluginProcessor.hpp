@@ -54,6 +54,7 @@ namespace Qv2rayPlugin
 
     class PluginKernelInterface
     {
+      public:
         virtual std::unique_ptr<PluginKernel> CreateKernel() const = 0;
         virtual QList<QString> GetKernelProtocols() const = 0;
     };

@@ -59,6 +59,7 @@ namespace Qv2rayPlugin
       public:
         QString protocol;
         QString displayName;
+        explicit ProtocolInfoObject(){};
         explicit ProtocolInfoObject(const QString &protocol, const QString &displayName) : protocol(protocol), displayName(displayName){};
         friend bool operator==(const ProtocolInfoObject &l, const ProtocolInfoObject &r)
         {

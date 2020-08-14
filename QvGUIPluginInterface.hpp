@@ -45,33 +45,33 @@ namespace Qv2rayPlugin
     class PluginGUIInterface
     {
       public:
-        using typed_plugin_editor = QPair<ProtocolInfoObject, std::shared_ptr<QvPluginEditor>>;
+        using typed_plugin_editor = QPair<ProtocolInfoObject, std::unique_ptr<QvPluginEditor>>;
         explicit PluginGUIInterface(){};
         virtual ~PluginGUIInterface(){};
         virtual QIcon Icon() const = 0;
         virtual QList<PluginGuiComponentType> GetComponents() const = 0;
-        virtual std::shared_ptr<QvPluginSettingsWidget> GetSettingsWidget() const final
+        virtual std::unique_ptr<QvPluginSettingsWidget> GetSettingsWidget() const final
         {
-            return settingsWidget;
+            return createSettingsWidgets();
         }
         virtual QList<typed_plugin_editor> GetInboundEditors() const final
         {
-            return inboundEditors;
+            return createInboundEditors();
         }
         virtual QList<typed_plugin_editor> GetOutboundEditors() const final
         {
-            return outboundEditors;
+            return createOutboundEditors();
         }
-        virtual std::shared_ptr<QvPluginMainWindowWidget> GetMainWindowWidget() const final
+        virtual std::unique_ptr<QvPluginMainWindowWidget> GetMainWindowWidget() const final
         {
-            return mainWindowWidget;
+            return createMainWindowWidget();
         }
 
       protected:
-        std::shared_ptr<QvPluginSettingsWidget> settingsWidget;
-        QList<typed_plugin_editor> inboundEditors;
-        QList<typed_plugin_editor> outboundEditors;
-        std::shared_ptr<QvPluginMainWindowWidget> mainWindowWidget;
+        virtual std::unique_ptr<QvPluginSettingsWidget> createSettingsWidgets() const = 0;
+        virtual QList<typed_plugin_editor> createInboundEditors() const = 0;
+        virtual QList<typed_plugin_editor> createOutboundEditors() const = 0;
+        virtual std::unique_ptr<QvPluginMainWindowWidget> createMainWindowWidget() const = 0;
     };
 
 } // namespace Qv2rayPlugin
