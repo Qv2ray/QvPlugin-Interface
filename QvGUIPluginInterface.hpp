@@ -1,6 +1,7 @@
 #pragma once
 #include "QvPluginBase.hpp"
 
+#include <QDialog>
 #include <QMenu>
 #include <QWidget>
 
@@ -16,11 +17,11 @@ namespace Qv2rayPlugin
         virtual QJsonObject GetSettings() = 0;
     };
 
-    class QvPluginMainWindowWidget : public QWidget
+    class QvPluginMainWindowWidget : public QDialog
     {
         Q_OBJECT
       public:
-        explicit QvPluginMainWindowWidget(QWidget *parent) : QWidget(parent){};
+        explicit QvPluginMainWindowWidget(QWidget *parent) : QDialog(parent){};
         virtual ~QvPluginMainWindowWidget(){};
         virtual const QList<QMenu *> GetMenus() = 0;
     };
