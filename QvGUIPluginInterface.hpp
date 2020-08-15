@@ -12,7 +12,10 @@ namespace Qv2rayPlugin
       public:
         explicit QvPluginSettingsWidget(QWidget *parent) : QWidget(parent){};
         virtual ~QvPluginSettingsWidget(){};
+        virtual void SetSettings(const QJsonObject &) = 0;
+        virtual QJsonObject GetSettings() = 0;
     };
+
     class QvPluginMainWindowWidget : public QWidget
     {
         Q_OBJECT
