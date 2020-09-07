@@ -33,7 +33,7 @@
 #include <QTcpSocket>
 #include <QUrl>
 
-#if defined(__APPLE__) || defined(_MSC_VER)
+#ifndef FD_SETSIZE
     #define FD_SETSIZE 1024
 #endif
 
