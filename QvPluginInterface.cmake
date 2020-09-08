@@ -8,17 +8,17 @@ endif()
 
 if(QVPLUGIN_HAS_HTTP_TO_SOCKS_HELPER)
     find_package(Qt5 COMPONENTS Network REQUIRED)
-    list(APPEND QV2RAY_QT_LIBS Qt5::Network)
+    list(APPEND QVPLUGIN_INTERFACE_LIBS Qt5::Network)
     set(QVPLUGIN_HTTP_TO_SOCKS_FILES
-        ${QVPLUGIN_INTERFACE_INCLUDE_DIR}/utils/HttpProxy.hpp
-        ${QVPLUGIN_INTERFACE_INCLUDE_DIR}/utils/SocketStream.hpp
+        ${CMAKE_CURRENT_LIST_DIR}/utils/HttpProxy.hpp
+        ${CMAKE_CURRENT_LIST_DIR}/utils/SocketStream.hpp
         )
 endif()
 
 set(QVPLUGIN_INTERFACE_HEADERS
     ${QVPLUGIN_HTTP_TO_SOCKS_FILES}
-    ${QVPLUGIN_INTERFACE_INCLUDE_DIR}/QvPluginBase.hpp
-    ${QVPLUGIN_INTERFACE_INCLUDE_DIR}/QvPluginInterface.hpp
-    ${QVPLUGIN_INTERFACE_INCLUDE_DIR}/QvPluginInterfaceModels.hpp
-    ${QVPLUGIN_INTERFACE_INCLUDE_DIR}/QvPluginProcessor.hpp)
-
+    ${CMAKE_CURRENT_LIST_DIR}/QvPluginBase.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/QvPluginInterface.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/QvPluginInterfaceModels.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/QvPluginProcessor.hpp)
+set(QVPLUGIN_INTERFACE_INCLUDE_DIR ${CMAKE_CURRENT_LIST_DIR})
