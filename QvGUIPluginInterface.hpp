@@ -35,6 +35,12 @@ namespace Qv2rayPlugin
     if (this->isLoading)                                                                                                                        \
         return;
 
+    const static inline auto GetProperty = [](const auto widget, auto name) -> auto
+    {
+        const auto prop = widget->property(name);
+        return prop.isValid() && prop.type() == QVariant::Bool && prop.toBool();
+    };
+
     class QvPluginEditor : public QWidget
     {
         Q_OBJECT
