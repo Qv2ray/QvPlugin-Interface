@@ -69,6 +69,8 @@ namespace Qv2rayPlugin
     };
 } // namespace Qv2rayPlugin
 
+#define DECLARE_PLUGIN_INSTANCE(CLASS) inline CLASS *CLASS##Instance
+
 QT_BEGIN_NAMESPACE
 #define Qv2rayInterface_IID "com.github.Qv2ray.Qv2rayPluginInterface"
 Q_DECLARE_INTERFACE(Qv2rayPlugin::Qv2rayInterface, Qv2rayInterface_IID)
