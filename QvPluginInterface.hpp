@@ -11,8 +11,6 @@ namespace Qv2rayPlugin
     class PluginKernelInterface;
     class Qv2rayInterface;
 
-    inline Qv2rayInterface *pluginInstance = nullptr;
-
     class Qv2rayInterface
     {
         friend class PluginOutboundHandler;
@@ -61,10 +59,7 @@ namespace Qv2rayPlugin
         }
 
       protected:
-        explicit Qv2rayInterface()
-        {
-            pluginInstance = this;
-        }
+        explicit Qv2rayInterface(){};
         QJsonObject settings;
         std::shared_ptr<PluginOutboundHandler> outboundHandler;
         std::shared_ptr<PluginEventHandler> eventHandler;
