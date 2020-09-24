@@ -5,12 +5,6 @@
 #include <QJsonObject>
 #include <QObject>
 
-#define __QVPLUGIN_EVENT_HANDLER_SIG(type) const ::Qv2rayPlugin::Events::type::EventObject &pluginEvent
-#define __QVPLUGIN_DECL_EVENT_HANDLER(type) void ProcessEvent_##type(__QVPLUGIN_EVENT_HANDLER_SIG(type))
-
-#define QvPlugin_EventHandler_Decl(type) __QVPLUGIN_DECL_EVENT_HANDLER(type) override
-#define QvPlugin_EventHandler(className, type) void className::ProcessEvent_##type(__QVPLUGIN_EVENT_HANDLER_SIG(type))
-
 namespace Qv2rayPlugin
 {
     class PluginOutboundHandler
@@ -60,13 +54,32 @@ namespace Qv2rayPlugin
         virtual QList<QString> GetKernelProtocols() const = 0;
     };
 
-    class PluginEventHandler
+    template<typename ...T> class Qp;
+
+    template<typename ...T>
+    class Qp
     {
-      public:
-        explicit PluginEventHandler(){};
-        virtual __QVPLUGIN_DECL_EVENT_HANDLER(ConnectionStats){ Q_UNUSED(pluginEvent) };
-        virtual __QVPLUGIN_DECL_EVENT_HANDLER(SystemProxy){ Q_UNUSED(pluginEvent) };
-        virtual __QVPLUGIN_DECL_EVENT_HANDLER(Connectivity){ Q_UNUSED(pluginEvent) };
-        virtual __QVPLUGIN_DECL_EVENT_HANDLER(ConnectionEntry){ Q_UNUSED(pluginEvent) };
+    public:
+         void ProcessEvent(){}
     };
+
+#define DEFAULT_IMPLEMENT ;
+
+    template<typename T1,typename ...T2>
+    class Qp<T1,T2...> : public Qp<T2...>
+    {
+    public:
+        using Qp<T2...>::ProcessEvent;
+        virtual void ProcessEvent(const T1 &pluginEvent){DEFAULT_IMPLEMENT};
+    };
+
+    using namespace ::Qv2rayPlugin::Events;
+
+    class PluginEventHandler :public Qp<Connectivity::EventObject,
+                                          SystemProxy::EventObject,
+                                          ConnectionEntry::EventObject,
+                                          ConnectionStats::EventObject>
+    {
+    };
+
 } // namespace Qv2rayPlugin
