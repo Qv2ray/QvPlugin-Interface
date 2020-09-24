@@ -37,7 +37,7 @@ namespace Qv2rayPlugin
         {
             return kernelInterface;
         }
-        virtual std::shared_ptr<PluginSubscriptionAdapter> GetSubscriptionAdapter() const final
+        virtual std::shared_ptr<SubscriptionInterface> GetSubscriptionAdapter() const final
         {
             return subscriptionAdapter;
         }
@@ -64,7 +64,7 @@ namespace Qv2rayPlugin
         std::shared_ptr<PluginOutboundHandler> outboundHandler;
         std::shared_ptr<PluginEventHandler> eventHandler;
         std::shared_ptr<PluginKernelInterface> kernelInterface;
-        std::shared_ptr<PluginSubscriptionAdapter> subscriptionAdapter;
+        std::shared_ptr<SubscriptionInterface> subscriptionAdapter;
         PluginGUIInterface *guiInterface;
     };
 } // namespace Qv2rayPlugin

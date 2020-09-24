@@ -27,11 +27,24 @@ namespace Qv2rayPlugin
         virtual const QList<QString> SupportedLinkPrefixes() const = 0;
     };
 
-    class PluginSubscriptionAdapter
+    // Subscription Adapter fetches data from an online service.
+    class SubscriptionDecoder
     {
       public:
-        explicit PluginSubscriptionAdapter(){};
-        virtual ~PluginSubscriptionAdapter(){};
+        struct SubscriptionDecodeResult
+        {
+            QList<QString> links;
+            QList<QPair<QString, QJsonObject>> connections;
+        };
+        virtual ~SubscriptionDecoder(){};
+        virtual SubscriptionDecodeResult DecodeData(const QByteArray &) const = 0;
+    };
+
+    class SubscriptionInterface
+    {
+      public:
+        virtual QList<ProtocolInfoObject> SupportedSubscriptionTypes() const = 0;
+        virtual std::shared_ptr<SubscriptionDecoder> GetSubscriptionDecoder(const QString &type) const = 0;
     };
 
     class PluginKernel : public QObject
