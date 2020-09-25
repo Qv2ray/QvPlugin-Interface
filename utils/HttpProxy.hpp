@@ -72,8 +72,7 @@ namespace Qv2rayPlugin
 #if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
                 connect(socket, &QAbstractSocket::errorOccurred, this, &HttpProxy::onSocketError);
 #else
-                connect(socket, static_cast<void (QTcpSocket::*)(QAbstractSocket::SocketError)>(&QTcpSocket::error), this,
-                        &HttpProxy::onSocketError);
+                connect(socket, static_cast<void (QTcpSocket::*)(QAbstractSocket::SocketError)>(&QTcpSocket::error), this, &HttpProxy::onSocketError);
 #endif
                 socket->setSocketDescriptor(socketDescriptor);
             }
@@ -165,8 +164,7 @@ namespace Qv2rayPlugin
 #if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
                 connect(socket, &QAbstractSocket::errorOccurred, this, &HttpProxy::onSocketError);
 #else
-                connect(socket, static_cast<void (QTcpSocket::*)(QAbstractSocket::SocketError)>(&QTcpSocket::error), this,
-                        &HttpProxy::onSocketError);
+                connect(socket, static_cast<void (QTcpSocket::*)(QAbstractSocket::SocketError)>(&QTcpSocket::error), this, &HttpProxy::onSocketError);
 #endif
                 proxySocket->connectToHost(host, port);
             }

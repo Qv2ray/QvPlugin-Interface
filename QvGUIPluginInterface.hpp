@@ -26,13 +26,13 @@ namespace Qv2rayPlugin
         virtual const QList<QMenu *> GetMenus() = 0;
     };
 
-#define PLUGIN_EDITOR_LOADING_SCOPE(t)                                                                                                          \
-    isLoading = true;                                                                                                                           \
-    t;                                                                                                                                          \
+#define PLUGIN_EDITOR_LOADING_SCOPE(t)                                                                                                               \
+    isLoading = true;                                                                                                                                \
+    t;                                                                                                                                               \
     isLoading = false;
 
-#define PLUGIN_EDITOR_LOADING_GUARD                                                                                                             \
-    if (this->isLoading)                                                                                                                        \
+#define PLUGIN_EDITOR_LOADING_GUARD                                                                                                                  \
+    if (this->isLoading)                                                                                                                             \
         return;
 
     const static inline auto GetProperty = [](const auto widget, auto name) -> auto
