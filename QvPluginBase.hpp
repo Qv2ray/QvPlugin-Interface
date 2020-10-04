@@ -7,9 +7,19 @@
 #include <memory>
 
 constexpr auto QV2RAY_PLUGIN_INTERFACE_VERSION = 3;
+constexpr auto QV2RAY_PLUGIN_INTERNAL_PROPERTY_KEY = "_QV2RAY_PLUGIN_OPTIONS_";
 
 namespace Qv2rayPlugin
 {
+    enum GlobalPluginOptions
+    {
+        OPTION_SET_TLS_ALLOW_INSECURE = 0,
+        OPTION_SET_TLS_SESSION_RESUMPTION = 1,
+        OPTION_SET_TLS_DISABLE_SYSTEM_CERTS = 2
+    };
+
+    using Qv2rayPluginOption = QMap<GlobalPluginOptions, QVariant>;
+
     enum PluginUpdateType
     {
         UPDATE_NONE = 0,
@@ -98,3 +108,5 @@ namespace Qv2rayPlugin
         QvPluginMetadata(){};
     };
 } // namespace Qv2rayPlugin
+
+Q_DECLARE_METATYPE(Qv2rayPlugin::Qv2rayPluginOption);
