@@ -17,12 +17,14 @@ namespace Qv2rayPlugin
     {
       public:
         explicit PluginOutboundHandler(){};
-        virtual const QString SerializeOutbound(const QString &protocol,  //
-                                                const QString &alias,     //
-                                                const QString &groupName, //
-                                                const QJsonObject &object) const = 0;
+        virtual const QString SerializeOutbound(const QString &protocol,   //
+                                                const QString &alias,      //
+                                                const QString &groupName,  //
+                                                const QJsonObject &object, //
+                                                const QJsonObject &streamSettings) const = 0;
         virtual const QPair<QString, QJsonObject> DeserializeOutbound(const QString &link, QString *alias, QString *errorMessage) const = 0;
         virtual const OutboundInfoObject GetOutboundInfo(const QString &protocol, const QJsonObject &outbound) const = 0;
+        virtual const void SetOutboundInfo(const QString &protocol, const OutboundInfoObject &info, QJsonObject &outbound) const = 0;
         virtual const QList<QString> SupportedProtocols() const = 0;
         virtual const QList<QString> SupportedLinkPrefixes() const = 0;
     };
