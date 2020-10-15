@@ -58,6 +58,7 @@ namespace Qv2rayPlugin
         virtual void SetConnectionSettings(const QMap<KernelOptionFlags, QVariant> &settings, const QJsonObject &connectionInfo) = 0;
         virtual bool StartKernel() = 0;
         virtual bool StopKernel() = 0;
+        virtual QString GetKernelName() const = 0;
         //
       signals:
         void OnKernelCrashed(const QString &);
