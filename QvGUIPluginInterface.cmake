@@ -8,11 +8,9 @@ endif()
 
 if(NOT QV_QT_LIBNAME)
     set(QV_QT_LIBNAME Qt5)
-    set(QV_QT_MAJOR_VERSION 5)
-    set(QV_QT_MINOR_VERSION 11)
 endif()
 
-find_package(${QV_QT_LIBNAME} ${QV_QT_MAJOR_VERSION}.${QV_QT_MINOR_VERSION} COMPONENTS Gui Widgets)
+find_package(${QV_QT_LIBNAME} COMPONENTS Gui Widgets)
 
 set(QVGUIPLUGIN_INTERFACE_HEADERS
     ${QVPLUGIN_INTERFACE_INCLUDE_DIR}/QvGUIPluginInterface.hpp)
