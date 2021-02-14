@@ -7,7 +7,7 @@
 #include <memory>
 
 constexpr auto QV2RAY_PLUGIN_INTERFACE_VERSION = 4;
-constexpr auto QV2RAY_PLUGIN_INTERNAL_PROPERTY_KEY = "_QV2RAY_PLUGIN_OPTIONS_";
+constexpr auto QV2RAY_PLUGIN_INTERNAL_PROPERTY_KEY = "QV2RAY_PLUGIN_OPTIONS";
 
 namespace Qv2rayPlugin
 {
@@ -15,7 +15,7 @@ namespace Qv2rayPlugin
     {
         OPTION_SET_TLS_ALLOW_INSECURE Q_DECL_ENUMERATOR_DEPRECATED_X("Do not use this!") = 0,
         OPTION_SET_TLS_SESSION_RESUMPTION Q_DECL_ENUMERATOR_DEPRECATED_X("Do not use this!") = 1,
-        OPTION_SET_TLS_DISABLE_SYSTEM_CERTS = 2
+        OPTION_SET_TLS_DISABLE_SYSTEM_CERTS Q_DECL_ENUMERATOR_DEPRECATED_X("Do not use this!") = 2
     };
 
     using Qv2rayPluginOption = QMap<GlobalPluginOptions, QVariant>;
@@ -44,26 +44,6 @@ namespace Qv2rayPlugin
         COMPONENT_SUBSCRIPTION_ADAPTER = 4,
     };
 
-    enum OutboundInfoFlags
-    {
-        INFO_DISPLAYNAME = 0,
-        INFO_PROTOCOL = 1,
-        INFO_SERVER = 2,
-        INFO_PORT = 3,
-        INFO_SNI = 4
-    };
-
-    enum KernelOptionFlags
-    {
-        KERNEL_HTTP_ENABLED,
-        KERNEL_HTTP_PORT,
-        KERNEL_SOCKS_ENABLED,
-        KERNEL_SOCKS_PORT,
-        KERNEL_SOCKS_UDP_ENABLED,
-        KERNEL_SOCKS_LOCAL_ADDRESS,
-        KERNEL_LISTEN_ADDRESS
-    };
-
     struct ProtocolInfoObject
     {
       public:
@@ -76,8 +56,6 @@ namespace Qv2rayPlugin
             return l.protocol == r.protocol && l.displayName == r.displayName;
         }
     };
-
-    typedef QMap<OutboundInfoFlags, QVariant> OutboundInfoObject;
 
     struct QvPluginMetadata
     {

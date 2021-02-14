@@ -35,8 +35,7 @@ namespace Qv2rayPlugin
     if (this->isLoading)                                                                                                                             \
         return;
 
-    const static inline auto GetProperty = [](const auto widget, auto name) -> auto
-    {
+    const static inline auto GetProperty = [](const QWidget *widget, const char *name) {
         const auto prop = widget->property(name);
         return prop.isValid() && prop.toBool();
     };
@@ -47,10 +46,8 @@ namespace Qv2rayPlugin
       public:
         explicit QvPluginEditor(QWidget *parent = nullptr) : QWidget(parent){};
         virtual ~QvPluginEditor(){};
-        //
         virtual void SetHostAddress(const QString &address, int port) = 0;
         virtual QPair<QString, int> GetHostAddress() const = 0;
-        //
         virtual void SetContent(const QJsonObject &) = 0;
         virtual const QJsonObject GetContent() const = 0;
 

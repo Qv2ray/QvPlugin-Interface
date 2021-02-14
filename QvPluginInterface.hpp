@@ -1,15 +1,15 @@
 #pragma once
 
 #include "QvPluginBase.hpp"
-#include "QvPluginProcessor.hpp"
+#include "handlers/EventHandler.hpp"
+#include "handlers/KernelHandler.hpp"
+#include "handlers/OutboundHandler.hpp"
+#include "handlers/SubscriptionHandler.hpp"
 
 namespace Qv2rayPlugin
 {
     class PluginGUIInterface;
     class QvPluginEditor;
-    class QvPluginSettingsWidget;
-    class PluginKernelInterface;
-    class Qv2rayInterface;
 
     class Qv2rayInterface
     {
@@ -33,7 +33,7 @@ namespace Qv2rayPlugin
         {
             return eventHandler;
         }
-        virtual std::shared_ptr<PluginKernelInterface> GetKernel() const final
+        virtual std::shared_ptr<PluginKernelHandler> GetKernel() const final
         {
             return kernelInterface;
         }
@@ -63,7 +63,7 @@ namespace Qv2rayPlugin
         QJsonObject settings;
         std::shared_ptr<PluginOutboundHandler> outboundHandler;
         std::shared_ptr<PluginEventHandler> eventHandler;
-        std::shared_ptr<PluginKernelInterface> kernelInterface;
+        std::shared_ptr<PluginKernelHandler> kernelInterface;
         std::shared_ptr<SubscriptionInterface> subscriptionAdapter;
         PluginGUIInterface *guiInterface;
     };

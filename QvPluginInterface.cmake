@@ -21,7 +21,12 @@ set(QVPLUGIN_INTERFACE_HEADERS
     ${CMAKE_CURRENT_LIST_DIR}/QvPluginBase.hpp
     ${CMAKE_CURRENT_LIST_DIR}/QvPluginInterface.hpp
     ${CMAKE_CURRENT_LIST_DIR}/QvPluginInterfaceModels.hpp
-    ${CMAKE_CURRENT_LIST_DIR}/QvPluginProcessor.hpp)
+    ${CMAKE_CURRENT_LIST_DIR}/handlers/EventHandler.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/handlers/KernelHandler.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/handlers/OutboundHandler.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/handlers/SubscriptionHandler.hpp
+
+    )
 
 function(qv2ray_configure_plugin TARGET_NAME)
     target_link_libraries(${TARGET_NAME} Qt::Core)
