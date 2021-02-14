@@ -13,8 +13,8 @@ namespace Qv2rayPlugin
 {
     enum GlobalPluginOptions
     {
-        OPTION_SET_TLS_ALLOW_INSECURE = 0,
-        OPTION_SET_TLS_SESSION_RESUMPTION = 1,
+        OPTION_SET_TLS_ALLOW_INSECURE Q_DECL_ENUMERATOR_DEPRECATED_X("Do not use this!") = 0,
+        OPTION_SET_TLS_SESSION_RESUMPTION Q_DECL_ENUMERATOR_DEPRECATED_X("Do not use this!") = 1,
         OPTION_SET_TLS_DISABLE_SYSTEM_CERTS = 2
     };
 
