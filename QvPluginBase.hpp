@@ -6,7 +6,7 @@
 #include <QVariant>
 #include <memory>
 
-constexpr auto QV2RAY_PLUGIN_INTERFACE_VERSION = 3;
+constexpr auto QV2RAY_PLUGIN_INTERFACE_VERSION = 4;
 constexpr auto QV2RAY_PLUGIN_INTERNAL_PROPERTY_KEY = "_QV2RAY_PLUGIN_OPTIONS_";
 
 namespace Qv2rayPlugin

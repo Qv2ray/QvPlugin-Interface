@@ -6,13 +6,9 @@ if(CMAKE_VERSION VERSION_LESS "3.7.0")
     set(CMAKE_INCLUDE_CURRENT_DIR ON)
 endif()
 
-if(NOT QV_QT_LIBNAME)
-    set(QV_QT_LIBNAME Qt5)
-endif()
-
-find_package(${QV_QT_LIBNAME} COMPONENTS Gui Widgets)
+find_package(Qt6 COMPONENTS Gui Widgets)
 
 set(QVGUIPLUGIN_INTERFACE_HEADERS
-    ${QVPLUGIN_INTERFACE_INCLUDE_DIR}/QvGUIPluginInterface.hpp)
+    ${CMAKE_CURRENT_LIST_DIR}/QvGUIPluginInterface.hpp)
 
-list(APPEND QV2RAY_QT_LIBS ${QV_QT_LIBNAME}::Gui ${QV_QT_LIBNAME}::Widgets)
+list(APPEND QV2RAY_QT_LIBS Qt::Gui Qt::Widgets)
