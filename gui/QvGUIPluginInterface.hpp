@@ -1,12 +1,35 @@
 #pragma once
-#include "QvPluginBase.hpp"
 
 #include <QDialog>
+#include <QJsonObject>
+#include <QList>
 #include <QMenu>
 #include <QWidget>
 
 namespace Qv2rayPlugin
 {
+
+    enum PluginGuiComponentType
+    {
+        GUI_COMPONENT_SETTINGS = 0,
+        GUI_COMPONENT_OUTBOUND_EDITOR = 1,
+        GUI_COMPONENT_INBOUND_EDITOR = 2,
+        GUI_COMPONENT_MAINWINDOW_WIDGET = 3
+    };
+
+    struct ProtocolInfoObject
+    {
+      public:
+        QString protocol;
+        QString displayName;
+        explicit ProtocolInfoObject(){};
+        explicit ProtocolInfoObject(const QString &protocol, const QString &displayName) : protocol(protocol), displayName(displayName){};
+        friend bool operator==(const ProtocolInfoObject &l, const ProtocolInfoObject &r)
+        {
+            return l.protocol == r.protocol && l.displayName == r.displayName;
+        }
+    };
+
     class QvPluginSettingsWidget : public QWidget
     {
         Q_OBJECT

@@ -27,14 +27,6 @@ namespace Qv2rayPlugin
         UPDATE_URL = 2
     };
 
-    enum PluginGuiComponentType
-    {
-        GUI_COMPONENT_SETTINGS = 0,
-        GUI_COMPONENT_OUTBOUND_EDITOR = 1,
-        GUI_COMPONENT_INBOUND_EDITOR = 2,
-        GUI_COMPONENT_MAINWINDOW_WIDGET = 3
-    };
-
     enum PluginComponentType
     {
         COMPONENT_EVENT_HANDLER = 0,
@@ -42,19 +34,6 @@ namespace Qv2rayPlugin
         COMPONENT_KERNEL = 2,
         COMPONENT_OUTBOUND_HANDLER = 3,
         COMPONENT_SUBSCRIPTION_ADAPTER = 4,
-    };
-
-    struct ProtocolInfoObject
-    {
-      public:
-        QString protocol;
-        QString displayName;
-        explicit ProtocolInfoObject(){};
-        explicit ProtocolInfoObject(const QString &protocol, const QString &displayName) : protocol(protocol), displayName(displayName){};
-        friend bool operator==(const ProtocolInfoObject &l, const ProtocolInfoObject &r)
-        {
-            return l.protocol == r.protocol && l.displayName == r.displayName;
-        }
     };
 
     struct QvPluginMetadata
