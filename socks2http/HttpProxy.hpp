@@ -34,7 +34,7 @@
 #include <QUrl>
 
 #ifndef FD_SETSIZE
-    #define FD_SETSIZE 1024
+#define FD_SETSIZE 1024
 #endif
 
 namespace Qv2rayPlugin
@@ -69,11 +69,7 @@ namespace Qv2rayPlugin
                 QTcpSocket *socket = new QTcpSocket(this);
                 connect(socket, &QTcpSocket::readyRead, this, &HttpProxy::onSocketReadyRead);
                 connect(socket, &QTcpSocket::disconnected, socket, &QTcpSocket::deleteLater);
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
                 connect(socket, &QAbstractSocket::errorOccurred, this, &HttpProxy::onSocketError);
-#else
-                connect(socket, static_cast<void (QTcpSocket::*)(QAbstractSocket::SocketError)>(&QTcpSocket::error), this, &HttpProxy::onSocketError);
-#endif
                 socket->setSocketDescriptor(socketDescriptor);
             }
 
@@ -161,11 +157,7 @@ namespace Qv2rayPlugin
                     connect(proxySocket, &QTcpSocket::connected, this, &HttpProxy::onProxySocketConnectedHttps);
                 }
                 connect(proxySocket, &QTcpSocket::disconnected, proxySocket, &QTcpSocket::deleteLater);
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
                 connect(socket, &QAbstractSocket::errorOccurred, this, &HttpProxy::onSocketError);
-#else
-                connect(socket, static_cast<void (QTcpSocket::*)(QAbstractSocket::SocketError)>(&QTcpSocket::error), this, &HttpProxy::onSocketError);
-#endif
                 proxySocket->connectToHost(host, port);
             }
 
