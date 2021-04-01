@@ -1,3 +1,4 @@
+#pragma once
 #include <QMap>
 
 namespace Qv2rayPlugin::handlers::event
