@@ -101,6 +101,7 @@ function(qv2ray_configure_plugin TARGET_NAME)
         find_package(Qt6 COMPONENTS Gui REQUIRED)
         target_link_libraries(${TARGET_NAME} Qt::Gui)
         target_include_directories(${TARGET_NAME} PRIVATE ${QVGUIPLUGIN_INTERFACE_INCLUDE_PATH})
+        target_sources(${TARGET_NAME} PRIVATE ${QVGUIPLUGIN_INTERFACE_HEADERS})
     endif()
 
     if(QVPLUGIN_Quick)
